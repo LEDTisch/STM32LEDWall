@@ -35,34 +35,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := Neopixel_CM4
+BUILD_ARTIFACT_NAME := LEDWall_CM4
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-Neopixel_CM4.elf \
+LEDWall_CM4.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-Neopixel_CM4.list \
+LEDWall_CM4.list \
 
 OBJCOPY_BIN += \
-Neopixel_CM4.bin \
+LEDWall_CM4.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: Neopixel_CM4.elf secondary-outputs
+main-build: LEDWall_CM4.elf secondary-outputs
 
 # Tool invocations
-Neopixel_CM4.elf: $(OBJS) $(USER_OBJS) /home/felix/Documents/GitHub/Neopixel/CM4/STM32H755ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Neopixel_CM4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/felix/Documents/GitHub/Neopixel/CM4/STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Neopixel_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+LEDWall_CM4.elf: $(OBJS) $(USER_OBJS) /run/media/tim/Festplatte2/GitHub/LEDTisch/STM32LEDWall/CM4/STM32H755ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "LEDWall_CM4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/run/media/tim/Festplatte2/GitHub/LEDTisch/STM32LEDWall/CM4/STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LEDWall_CM4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,19 +71,19 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Neopixel_CM4.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Neopixel_CM4.list"
+LEDWall_CM4.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "LEDWall_CM4.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Neopixel_CM4.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "Neopixel_CM4.bin"
+LEDWall_CM4.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "LEDWall_CM4.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) Neopixel_CM4.bin Neopixel_CM4.elf Neopixel_CM4.list default.size.stdout
+	-$(RM) LEDWall_CM4.bin LEDWall_CM4.elf LEDWall_CM4.list default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)

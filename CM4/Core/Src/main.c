@@ -335,7 +335,7 @@ int main(void)
 	  HAL_GPIO_TogglePin(orangeled_GPIO_Port, orangeled_Pin);
 	  HAL_Delay(500);
 
-	  Set_LED(0, 100, 100, 100);
+	  Set_LED(0, 100, 0, 0);
 
 	  //send(255, 255, 255);
 

@@ -60,12 +60,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define greenled_Pin GPIO_PIN_0
+#define greenled_GPIO_Port GPIOB
+#define Neopixel_Pin GPIO_PIN_9
+#define Neopixel_GPIO_Port GPIOE
 #define STLINK_RX_Pin GPIO_PIN_8
 #define STLINK_RX_GPIO_Port GPIOD
 #define STLINK_TX_Pin GPIO_PIN_9
 #define STLINK_TX_GPIO_Port GPIOD
-#define orangeled_Pin GPIO_PIN_1
-#define orangeled_GPIO_Port GPIOE
 void   MX_ETH_Init(void);
 void   MX_USART3_UART_Init(void);
 /* USER CODE BEGIN Private defines */

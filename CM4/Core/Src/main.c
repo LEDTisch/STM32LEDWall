@@ -332,7 +332,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_GPIO_TogglePin(orangeled_GPIO_Port, orangeled_Pin);
+	  HAL_GPIO_TogglePin(greenled_GPIO_Port, greenled_Pin);
 	  HAL_Delay(500);
 
 	  Set_LED(0, 0, 100, 0);
@@ -547,17 +547,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(orangeled_GPIO_Port, orangeled_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(greenled_GPIO_Port, greenled_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : orangeled_Pin */
-  GPIO_InitStruct.Pin = orangeled_Pin;
+  /*Configure GPIO pin : greenled_Pin */
+  GPIO_InitStruct.Pin = greenled_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(orangeled_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(greenled_GPIO_Port, &GPIO_InitStruct);
 
 }
 

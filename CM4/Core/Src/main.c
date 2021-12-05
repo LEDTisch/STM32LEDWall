@@ -246,25 +246,20 @@ int main(void)
   MX_DMA_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  CPPMain();
+  NeopixelChannel strip=newChannel(&htim1, TIM_CHANNEL_1);
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_GPIO_TogglePin(greenled_GPIO_Port, greenled_Pin);
-	  HAL_Delay(500);
+		HAL_GPIO_TogglePin(greenled_GPIO_Port, greenled_Pin);
+		HAL_Delay(100);
 
-	  Set_LED(0, 0, 10, 0);
-
-	  //send(255, 255, 255);
-
-	  WS2812_Send(0);
   }
   /* USER CODE END 3 */
 }
@@ -453,12 +448,12 @@ static void MX_DMA_Init(void)
 {
 
   /* DMA controller clock enable */
-  __HAL_RCC_DMA2_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
-  /* DMA2_Stream1_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
 
 }
 

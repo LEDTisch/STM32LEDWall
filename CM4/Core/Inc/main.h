@@ -29,6 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "NeopixelDriver.h"
@@ -68,7 +69,6 @@ void CPPMain();
 #define STLINK_TX_GPIO_Port GPIOD
 void   MX_ETH_Init(void);
 void   MX_USART3_UART_Init(void);
-
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

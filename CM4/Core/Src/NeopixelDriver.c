@@ -65,6 +65,7 @@
 			indx++;
 		}
 		//nchannel->datasentflag = 0;
+		HAL_TIM_PWM_Stop_DMA(nchannel->htim, nchannel->TimerChannel);
 		HAL_TIM_PWM_Start_DMA(nchannel->htim, nchannel->TimerChannel, (uint32_t *)nchannel->pwmData, indx);
 		//if(blocking==1)while (!nchannel->datasentflag){};
 	}
@@ -81,6 +82,6 @@
 
 	void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 	{
-		HAL_TIM_PWM_Stop_DMA(htim, htim->Channel);
+		//HAL_TIM_PWM_Stop_DMA(htim, TIM_CHANNEL_1);
 		//datasentflag=1;
 	}

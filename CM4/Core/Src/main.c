@@ -74,6 +74,7 @@ ETH_HandleTypeDef heth;
 
 TIM_HandleTypeDef htim1;
 DMA_HandleTypeDef hdma_tim1_ch1;
+DMA_HandleTypeDef hdma_tim1_ch2;
 
 UART_HandleTypeDef huart3;
 
@@ -144,8 +145,8 @@ int main(void)
   CPPMain();
   NeopixelChannel strip;
   newChannel(&strip, &htim1, TIM_CHANNEL_1, 1, 0);
-  Set_LED(&strip, 0, 30, 0, 0);
-  WS2812_Send(&strip, 0);
+  NeopixelChannel strip2;
+  newChannel(&strip2, &htim1, TIM_CHANNEL_2, 1, 0);
   while (1)
   {
     /* USER CODE END WHILE */
@@ -153,6 +154,12 @@ int main(void)
     /* USER CODE BEGIN 3 */
 		HAL_GPIO_TogglePin(greenled_GPIO_Port, greenled_Pin);
 		HAL_Delay(100);
+
+	  Set_LED(&strip, 0, 30, 0, 0);
+	  WS2812_Send(&strip, 0);
+
+	  Set_LED(&strip2, 0, 0, 30, 0);
+	  WS2812_Send(&strip2, 0);
 
   }
   /* USER CODE END 3 */
@@ -265,6 +272,10 @@ static void MX_TIM1_Init(void)
   {
     Error_Handler();
   }
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
@@ -348,6 +359,9 @@ static void MX_DMA_Init(void)
   /* DMA1_Stream0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
+  /* DMA1_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
 
 }
 
